@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { analyzeReturn } from '../api'
 import axios from 'axios'
+import { API_BASE_URL } from '../config'
 import GradCam from './GradCam'
 
 export default function SubmitReturn({ onSuccess }) {
@@ -24,7 +25,7 @@ export default function SubmitReturn({ onSuccess }) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios.get('http://localhost:8000/orders/all')
+    axios.get(`${API_BASE_URL}/orders/all`)
       .then(r => {
         setOrders(r.data)
         if (r.data.length > 0) setForm(p => ({ ...p, order_id: String(r.data[0].id) }))

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
+import { API_BASE_URL } from '../config'
 
 const QUICK = [
   "How do I return an item?",
@@ -31,7 +32,7 @@ export default function Chatbot() {
     try {
       const fd = new FormData()
       fd.append('message', msg)
-      const res = await axios.post('http://localhost:8000/returns/chat', fd)
+      const res = await axios.post(`${API_BASE_URL}/returns/chat`, fd)
       setMessages(p => [...p, { from: 'bot', text: res.data.reply }])
     } catch {
       setMessages(p => [...p, { from: 'bot', text: 'Sorry, I am having trouble connecting. Please try again.' }])
